@@ -9,6 +9,7 @@ import {
   NativeEventEmitter,
 } from 'react-native';
 import {AdyenEncryptor, CardForm} from 'react-native-adyen';
+import env from 'react-native-config';
 
 const {RNAdyenEventEmitter} = NativeModules;
 
@@ -27,10 +28,13 @@ const App: React.FC = () => {
     expiryMonth: '',
     expiryYear: '',
   });
+  const {ADYEN_PUBLIC_KEY} = env;
 
-  const encryptor = new AdyenEncryptor('');
+  const encryptor = new AdyenEncryptor(ADYEN_PUBLIC_KEY);
+  debugger;
 
   const handleAdyenCardEncryptedSuccess = (data: EncryptedCard) => {
+    debugger;
     setEncryptedData(
       `encyptedCardNumber: ${data.encryptedCardNumber}\nencryptedSecurityCode: ${data.encryptedSecurityCode}\nencryptedExpiryYear: ${data.encryptedExpiryYear}\nencryptedExpiryMonth: ${data.encryptedExpiryMonth}`,
     );
