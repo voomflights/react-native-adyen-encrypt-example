@@ -1,24 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import {
-  ScrollView,
-  Text,
-  SafeAreaView,
-  TextInput,
-  Button,
-  NativeModules,
-  NativeEventEmitter,
-} from 'react-native';
-import {AdyenEncryptor, CardForm} from 'react-native-adyen';
+import {ScrollView, Text, SafeAreaView, TextInput, Button} from 'react-native';
+import {AdyenEncryptor, CardForm, EncryptedCard} from 'react-native-adyen';
 import env from 'react-native-config';
-
-const {RNAdyenEventEmitter} = NativeModules;
-
-interface EncryptedCard {
-  encryptedCardNumber: string;
-  encryptedExpiryMonth: string;
-  encryptedExpiryYear: string;
-  encryptedSecurityCode: string;
-}
 
 const App: React.FC = () => {
   const [encryptedData, setEncryptedData] = useState('');
@@ -31,29 +14,15 @@ const App: React.FC = () => {
   const {ADYEN_PUBLIC_KEY} = env;
 
   const encryptor = new AdyenEncryptor(ADYEN_PUBLIC_KEY);
-  debugger;
-
-  const handleAdyenCardEncryptedSuccess = (data: EncryptedCard) => {
-    debugger;
-    setEncryptedData(
-      `encyptedCardNumber: ${data.encryptedCardNumber}\nencryptedSecurityCode: ${data.encryptedSecurityCode}\nencryptedExpiryYear: ${data.encryptedExpiryYear}\nencryptedExpiryMonth: ${data.encryptedExpiryMonth}`,
-    );
-  };
 
   const handleOnPress = () => {
-    encryptor.encryptCard(cardForm);
+    const promise = encryptor.encryptCard(cardForm);
+    promise.then((data: EncryptedCard) => {
+      setEncryptedData(
+        `encyptedCardNumber: ${data.encryptedCardNumber}\nencryptedSecurityCode: ${data.encryptedSecurityCode}\nencryptedExpiryYear: ${data.encryptedExpiryYear}\nencryptedExpiryMonth: ${data.encryptedExpiryMonth}`,
+      );
+    });
   };
-
-  useEffect(() => {
-    const emitter = new NativeEventEmitter(RNAdyenEventEmitter);
-    const adyenSubscription = emitter.addListener(
-      'AdyenCardEncryptedSuccess',
-      handleAdyenCardEncryptedSuccess,
-    );
-    return () => {
-      adyenSubscription.remove();
-    };
-  });
 
   return (
     <SafeAreaView>
