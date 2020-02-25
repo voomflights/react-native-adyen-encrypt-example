@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {ScrollView, Text, SafeAreaView, TextInput, Button} from 'react-native';
 import {AdyenEncryptor, CardForm, EncryptedCard} from 'react-native-adyen';
 import env from 'react-native-config';
