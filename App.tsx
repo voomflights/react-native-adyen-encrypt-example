@@ -19,7 +19,7 @@ const App: React.FC = () => {
     const promise = encryptor.encryptCard(cardForm);
     promise.then((data: EncryptedCard) => {
       setEncryptedData(
-        `encyptedCardNumber: ${data.encryptedCardNumber}\nencryptedSecurityCode: ${data.encryptedSecurityCode}\nencryptedExpiryYear: ${data.encryptedExpiryYear}\nencryptedExpiryMonth: ${data.encryptedExpiryMonth}`,
+        `encyptedCardNumber: ${data.encryptedCardNumber}\n\nencryptedSecurityCode: ${data.encryptedSecurityCode}\n\nencryptedExpiryYear: ${data.encryptedExpiryYear}\n\nencryptedExpiryMonth: ${data.encryptedExpiryMonth}`,
       );
     });
   };
