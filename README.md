@@ -1,5 +1,5 @@
-# react-native-adyen-example
-example application for react-native-adyen library (https://github.com/voomflights/react-native-adyen-encrypt)
+# react-native-adyen-encrypt-example
+example application for react-native-adyen-encrypt library (https://github.com/voomflights/react-native-adyen-encrypt)
 
 ## Getting Started
 
