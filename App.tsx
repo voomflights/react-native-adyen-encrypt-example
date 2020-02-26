@@ -1,6 +1,10 @@
 import React, {useState} from 'react';
 import {ScrollView, Text, SafeAreaView, TextInput, Button} from 'react-native';
-import {AdyenEncryptor, CardForm, EncryptedCard} from 'react-native-adyen';
+import {
+  AdyenEncryptor,
+  CardForm,
+  EncryptedCard,
+} from 'react-native-adyen-encrypt';
 import env from 'react-native-config';
 
 const App: React.FC = () => {
